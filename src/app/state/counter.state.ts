@@ -1,3 +1,8 @@
-export const initialState = {
-    counter: 0
+
+export interface counterState {
+    counter: number
+}
+
+export const initialState: counterState = {
+    counter: 10
 }
