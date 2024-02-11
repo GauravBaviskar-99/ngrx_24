@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,12 @@ import { CounterOutputComponent } from './counter-output/counter-output.componen
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './state/counter.reducer';
 import { CustomCounterComponent } from './custom-counter/custom-counter.component';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { PostComponent } from './posts/post/post.component';
+import { PostlistComponent } from './posts/postlist/postlist.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 
 @NgModule({
   declarations: [
@@ -16,12 +22,24 @@ import { CustomCounterComponent } from './custom-counter/custom-counter.componen
     CounterComponent,
     CounterButtonsComponent,
     CounterOutputComponent,
-    CustomCounterComponent
+    CustomCounterComponent,
+    HeaderComponent,
+    HomeComponent,
+    PostComponent,
+    PostlistComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({counter:counterReducer})
+    StoreModule.forRoot({counter:counterReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: !isDevMode(), // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+      trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+      // connectInZone: true // If set to true, the connection is established within the Angular zone
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
