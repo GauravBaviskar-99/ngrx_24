@@ -3,17 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CounterComponent } from './counter/counter.component';
-import { CounterButtonsComponent } from './counter-buttons/counter-buttons.component';
-import { CounterOutputComponent } from './counter-output/counter-output.component';
+import { CounterComponent } from './CounterModule/counter/counter.component';
+import { CounterButtonsComponent } from './CounterModule/counter-buttons/counter-buttons.component';
+import { CounterOutputComponent } from './CounterModule/counter-output/counter-output.component';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './state/counter.reducer';
-import { CustomCounterComponent } from './custom-counter/custom-counter.component';
+import { counterReducer } from './CounterModule/state/counter.reducer';
+import { CustomCounterComponent } from './CounterModule/custom-counter/custom-counter.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { PostComponent } from './posts/post/post.component';
 import { PostlistComponent } from './posts/postlist/postlist.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppReducer } from './appState/appState';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({counter:counterReducer}),
+    StoreModule.forRoot(AppReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
